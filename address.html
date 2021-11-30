@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="../assets/img/DithereumIconFavicon.png">
+    <link rel="icon" type="image/png" href="assets/img/DithereumIconFavicon.png">
     <title>Dithereum (DITH) Blockchain Explorer</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -22,7 +22,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center" >
-          <a href="../"><img src="../assets/img/logo.png"></a>
+          <a href="../"><img src="assets/img/logo.png"></a>
           <h1>Blockchain Explorer</h1>
           <div class="row">
             <div class="col-md-9"><input type="text" class="form-control" id="txtInput" placeholder="Enter Txn Hash / Address"></div>
@@ -50,7 +50,7 @@
           return results[1] || 0;
       };
       if (window.location.href.indexOf('address') > 0) {
-        address = window.location.href.substr(34)
+        address = window.location.href.substr(47)
       }
 
       async function init(){
@@ -66,10 +66,10 @@
       const txtInput = $('#txtInput').val();
       
       if(txtInput.length==66){
-          location.href="../tx/"+txtInput;
+          location.href="transaction.html?tx="+txtInput;
       }
       if(txtInput.length==42){
-        location.href="../address/"+txtInput;
+        location.href="address.html?address="+txtInput;
       }
     });
       function convertTimestamp(time) {
