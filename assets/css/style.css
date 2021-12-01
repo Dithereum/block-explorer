@@ -1,0 +1,108 @@
+/*
+ * Globals
+ */
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-Light.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Light.otf') format('opentype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-Light.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Light.otf') format('opentype');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-Regular.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Regular.otf') format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  src: url('../fonts/BinancePlex-Regular.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-Medium.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Medium.otf') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-Medium.woff2') format('woff2'),
+    url('../fonts/BinancePlex-Medium.otf') format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-SemiBold.woff2') format('woff2'),
+    url('../fonts/BinancePlex-SemiBold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-SemiBold.woff2') format('woff2'),
+    url('../fonts/BinancePlex-SemiBold.otf') format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'BinancePlex';
+  font-display: swap;
+  src: url('../fonts/BinancePlex-SemiBold.woff2') format('woff2'),
+    url('../fonts/BinancePlex-SemiBold.otf') format('opentype');
+  font-weight: 900;
+}
+
+:root {
+  font-family: BinancePlex, -apple-system, '.SFNSText-Regular', 'San Francisco', BlinkMacSystemFont,
+    '.PingFang-SC-Regular', 'Microsoft YaHei', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+}
+
+body,
+*,
+*::before,
+*::after {
+  font-family: inherit;
+}
+/*
+h1 {
+  margin: 20px 0px;
+}
+*/
+.navbar .logo img{
+  width: 160px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #0062cc;
+    font-size: 30px;
+}
+
+.card-body{
+  text-align: center;
+}
+
+.card-body h5{
+  margin-bottom: 0!important;
+}
