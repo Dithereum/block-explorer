@@ -15,7 +15,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand logo" href="index.html">
+        <a class="navbar-brand logo" href="#">
           <img src="assets/img/logo.png">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,13 +150,16 @@
     },2000);
     //setInterval(getBlocks,10000);
     setTimeout(getTransactions,2000);
-    setInterval(getTransactions,10000);
+    //setInterval(getTransactions,10000);
 
     async function getBlocks(length){
-        $('#blocksData').html('');
+        //$('#blocksData').html('');
         var latestBlock = await web3.eth.getBlockNumber();
         $('#latestBlock').html(latestBlock);
-      
+      for ( var j=length;j>=0;j--){
+        const rj = 12-j;
+        $('.txRow').eq(rj).remove();
+      }
 // List blocks in table
       for (var i = 0; i < length; i++) {
         var block =await web3.eth.getBlock(latestBlock - i);
@@ -166,7 +169,13 @@
         var time = block.timestamp;
         var gas = block.gasUsed;
         convertTimestamp(time);
-          $('#blocksData').append("<tr class='txRow' id='row"+i+"'><td>" + number + "</td><td>" + txCount + "</td><td>" + time1 + "</td><td>" + gas + "</tr>");    
+        if(length<12){
+          await sleep(1000);
+          $('#blocksData').prepend("<tr class='txRow' id='row"+i+"'><td>" + number + "</td><td>" + txCount + "</td><td>" + time1 + "</td><td>" + gas + "</tr>");
+        }else{
+          $('#blocksData').append("<tr class='txRow' id='row"+i+"'><td>" + number + "</td><td>" + txCount + "</td><td>" + time1 + "</td><td>" + gas + "</tr>");
+        }
+        
       }
     }
     async function getTransactions(){
@@ -231,7 +240,7 @@
       if(oldBlock<latestBlock){
         const length = latestBlock-oldBlock;
         oldBlock = latestBlock;
-        getBlocks(12);
+        getBlocks(length);
         
       }
       $('#latestBlock').html(latestBlock);
