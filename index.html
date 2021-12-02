@@ -140,23 +140,23 @@
       var web3Provider = new Web3.providers.HttpProvider(provider);
       var web3;
       var oldBlock=0;
+      web3 = new Web3(provider);
       async function init(){
         web3 = new Web3(provider);
        
-    }
-    setTimeout(init,1000);
+      }
+    setTimeout(init,200);
     setTimeout(function() {
       getBlocks(12);
-    },2000);
+    },1000);
     //setInterval(getBlocks,10000);
-    setTimeout(getTransactions,2000);
-    setInterval(getTransactions,10000);
+    setTimeout(getTransactions,1000);
+    //setInterval(getTransactions,5000);
 
     async function getBlocks(length){
-        $('#blocksData').html('');
         var latestBlock = await web3.eth.getBlockNumber();
         $('#latestBlock').html(latestBlock);
-      
+        var blocksData = '';
 // List blocks in table
       for (var i = 0; i < length; i++) {
         var block =await web3.eth.getBlock(latestBlock - i);
@@ -166,11 +166,13 @@
         var time = block.timestamp;
         var gas = block.gasUsed;
         convertTimestamp(time);
-          $('#blocksData').append("<tr class='txRow' id='row"+i+"'><td>" + number + "</td><td>" + txCount + "</td><td>" + time1 + "</td><td>" + gas + "</tr>");    
+            blocksData+="<tr class='txRow' id='row"+i+"'><td>" + number + "</td><td>" + txCount + "</td><td>" + time1 + "</td><td>" + gas + "</tr>";    
       }
+      $('#blocksData').html(blocksData);
+
     }
     async function getTransactions(){
-      $('#txData').html('');
+      var txData = '';
       var latestBlock = await web3.eth.getBlockNumber();
       var block =await web3.eth.getBlock(latestBlock - 1);
       var latestTransactions =  block.transactions;
@@ -181,8 +183,9 @@
           const to=getShortAddress(tx.to);
           var value=tx.value/1e18;
           value = value.toFixed(6);
-          $('#txData').append("<tr><td><a href='transaction.html?tx="+latestTransactions[i]+"'>" + txHash + "</a></td><td><a href='address.html?address="+tx.from+"'>" + from + "</a></td><td><a href='address.html?address="+to+"'>" + to + "</a></td><td>" + value + " DTH</tr>");
+            txData+="<tr><td><a href='transaction.html?tx="+latestTransactions[i]+"'>" + txHash + "</a></td><td><a href='address.html?address="+tx.from+"'>" + from + "</a></td><td><a href='address.html?address="+to+"'>" + to + "</a></td><td>" + value + " DTH</tr>";
         }
+        $('#txData').html(txData);
     }
   //get short user address
   function getShortAddress(userAddress){
@@ -221,7 +224,7 @@
             return time1;
         }
 
-    setInterval(getBlock,3000);
+    setInterval(getBlock,5000);
 
     async function getBlock(){
       var latestBlock = await web3.eth.getBlockNumber();
@@ -232,7 +235,7 @@
         const length = latestBlock-oldBlock;
         oldBlock = latestBlock;
         getBlocks(12);
-        
+        getTransactions();
       }
       $('#latestBlock').html(latestBlock);
     }
