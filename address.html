@@ -73,7 +73,7 @@
           <div class="card">
             <div class="card-body">
               <h6> System Rewards</h6>
-              <h5> <span id="balance">0 DTH</span></h5>
+              <h5> <span id="balance2">0 DTH</span></h5>
             </div>
           </div>
         </div>
@@ -139,7 +139,8 @@
         // const balance = await web3.eth.getBalance(address);
         const balance = await web3.eth.getBalance(address);
         $('#txAddress').html(address);
-        $('#balance').html(balance/1e18+' DTH');   
+        //$('#balance').html(balance/1e18+' DTH');   
+        $('#balance').html((balance/1e18).toFixed(4) +' DTH');   
         USDTInstance  = new web3.eth.Contract( abiUSDT, contractUSDT, {});
         const USDTbalance = await USDTInstance.methods.balanceOf(address).call();
         assetsData+="<tr><td>USDT</td><td>" + USDTbalance + "</td></tr>"; 
