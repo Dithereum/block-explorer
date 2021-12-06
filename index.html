@@ -194,16 +194,20 @@
       var latestBlock = await web3.eth.getBlockNumber();
       var block =await web3.eth.getBlock(latestBlock - 1);
       var latestTransactions =  block.transactions;
-      for(var i=0;i<=11;i++){
-          const txHash = getShortAddress(latestTransactions[i]);
-          const tx = await web3.eth.getTransaction(latestTransactions[i]);
-          const from=getShortAddress(tx.from);
-          const to=getShortAddress(tx.to);
-          var value=tx.value/1e18;
-          value = value.toFixed(6);
-            txData+="<tr><td><a href='transaction.html?tx="+latestTransactions[i]+"'>" + txHash + "</a></td><td><a href='address.html?address="+tx.from+"'>" + from + "</a></td><td><a href='address.html?address="+to+"'>" + to + "</a></td><td>" + value + " DTH</tr>";
-        }
+      if(latestTransactions.length>0){
+      	for(var i=0;i<=11;i++){
+	if(latestTransactions[i]!=undefined){
+	    const txHash = getShortAddress(latestTransactions[i]);
+	    const tx = await web3.eth.getTransaction(latestTransactions[i]);
+	    const from=getShortAddress(tx.from);
+	    const to=getShortAddress(tx.to);
+	    var value=tx.value/1e18;
+	    value = value.toFixed(6);
+	    txData+="<tr><td><a href='transaction.html?tx="+latestTransactions[i]+"'>" + txHash + "</a></td><td><a href='address.html?address="+tx.from+"'>" + from + "</a></td><td><a href='address.html?address="+to+"'>" + to + "</a></td><td>" + value + " DTH</tr>";
+	}
+     }
         $('#txData').html(txData);
+     }
     }
   //get short user address
   function getShortAddress(userAddress){
