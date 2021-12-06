@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" type="image/png" href="assets/img/DithereumIconFavicon.png">
     <title>Dithereum Block Explorer</title>
     <!-- Bootstrap -->
@@ -155,7 +154,7 @@
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
     <script>
-      var provider = 'http://node-mainnet.dithereum.org/'; //Your Infura Endpoint
+      var provider = 'http://node-mainnet.dithereum.org'; //Your Infura Endpoint
       var web3Provider = new Web3.providers.HttpProvider(provider);
       var web3;
       var oldBlock=0;
