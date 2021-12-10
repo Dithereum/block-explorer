@@ -210,7 +210,7 @@
         const fetchResponse =  await fetch(rewardsURL+'?user=0xa86e74bc23567a88c91fad3977250130e7fbd4a9');//+address);
         const edata = await fetchResponse.json();   
         var rewardsData= '';
-
+        console.log(edata);
         edata.forEach(element => {
           const txHash = element.txnHash;
           const txnMaker = element.txnMaker;
