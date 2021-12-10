@@ -99,7 +99,7 @@
                <h3> System Rewards Transactions </h3>
             </div>
             <div class="card-body" id="rewardsData">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 text-left">
                   <div class="media align-items-sm-center mr-4 mb-1 mb-sm-0">
                     <div class="d-none d-sm-flex mr-2">
@@ -129,8 +129,8 @@
                     </div>
                   </div>
                 </div>
-              </div>   
-              <hr class="hr-space">
+              </div>    -->
+              <!-- <hr class="hr-space">
               <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 text-left">
                   <div class="media align-items-sm-center mr-4 mb-1 mb-sm-0">
@@ -159,7 +159,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>    
           </div>    
         </div>
@@ -207,17 +207,17 @@
       }
 
       async function init(){
-        console.log(address);
         const fetchResponse =  await fetch(rewardsURL+'?user=0xa86e74bc23567a88c91fad3977250130e7fbd4a9');//+address);
         const edata = await fetchResponse.json();   
-        console.log(edata);
         var rewardsData= '';
 
         edata.forEach(element => {
           const txHash = element.txnHash;
           const txnMaker = element.txnMaker;
           const contract_address = element.contract_address;
-          const trans_fee_wei = element.trans_fee_wei;
+          var trans_fee_wei = element.trans_fee_wei;
+          trans_fee_wei = trans_fee_wei/1e18;
+          trans_fee_wei = trans_fee_wei.toFixed(4);
           rewardsData+= '<div class="row">'+
                 '<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 text-left">'+
                   '<div class="media align-items-sm-center mr-4 mb-1 mb-sm-0">'+
@@ -232,19 +232,19 @@
                       '<span class="d-inline-block d-sm-none mr-1">'+
                         '<img src="assets/img/DithereumIconFavicon.png" style="width: 100%;">'+
                       '</span>'+
-                      '<a class="hash-tag hash-tag--xs hash-tag-xs-down--md text-truncate" href="/tx/0x646c0211acfedca9c672138444482f76c246c81ce68785156b4b2ed4e1eb99a3">0x646c0211acfedca9c672138444482f76c246c81ce68785156b4b2ed4e1eb99a3</a>'+
-                      '<span class="d-none d-sm-block small text-secondary">53 secs ago</span>'+
+                      '<a class="hash-tag hash-tag--xs hash-tag-xs-down--md text-truncate" href="/transaction.html?tx="'+txHash+'>'+txHash+'</a>'+
+                      //'<span class="d-none d-sm-block small text-secondary">53 secs ago</span>'+
                     '</div>'+
                   '</div>'+
                 '</div>'+
                 '<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">'+
                   '<div class="d-sm-flex justify-content-between">'+
                     '<div class="text-nowrap mr-4 mb-1 mb-sm-0 text-left">'+
-                      '<span>User <a class="hash-tag text-truncate" href="/address/0x997e1f926d1cb9d090f900f5e5a6a1f57a8151fd">0x997e1f926d1cb9d090f900f5e5a6a1f57a8151fd</a></span>'+
-                      '<span class="d-sm-block">Contract <a href="/address/0xa9e4332448318da58cdd398286c0809684ed9bd4" class="hash-tag text-truncate">0xa9e4332448318da58cdd398286c0809684ed9bd4</a></span>'+
+                      '<span>User <a class="hash-tag text-truncate" href="/address.html?address='+txnMaker+'">'+txnMaker+'</a></span>'+
+                      '<span class="d-sm-block">Contract <a href="/address.html?address='+contract_address+'" class="hash-tag text-truncate">'+contract_address+'</a></span>'+
                     '</div>'+
                     '<div class="text-sm-left">'+
-                      '<span class="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap" data-toggle="tooltip" title="Amount">0<b>.</b>02457 DTH</span>'+
+                      '<span class="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap" data-toggle="tooltip" title="Amount">'+ trans_fee_wei+' DTH</span>'+
                     '</div>'+
                   '</div>'+
                 '</div>'+
