@@ -211,6 +211,7 @@
         const edata = await fetchResponse.json();   
         var rewardsData= '';
         console.log(edata);
+        sleep(1000);
         edata.forEach(element => {
           const txHash = element.txnHash;
           const txnMaker = element.txnMaker;
@@ -317,7 +318,9 @@
             return time1;
         }
 
-
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+       }
 function logEtoLongNumber(amountInLogE){
     
     amountInLogE = amountInLogE.toString();
