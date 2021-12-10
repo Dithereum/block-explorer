@@ -207,6 +207,33 @@
       }
 
       async function init(){
+        
+
+        var web3 = new Web3(provider);
+        var assetsData = '';
+        // const balance = await web3.eth.getBalance(address);
+        address = web3.utils.toChecksumAddress(address);
+        const balance = await web3.eth.getBalance(address);
+        $('#txAddress').html(address);
+        //$('#balance').html(balance/1e18+' DTH');   
+        $('#balance').html((balance/1e18).toFixed(4) +' DTH');   
+        USDTInstance  = new web3.eth.Contract( abiTokenContract, contractUSDT, {});
+        const USDTbalance = await USDTInstance.methods.balanceOf(address).call();
+        assetsData+="<tr><td>USDT</td><td>" + USDTbalance + "</td></tr>"; 
+        USDCInstance  = new web3.eth.Contract( abiTokenContract, contractUSDC, {});
+        const USDCbalance = await USDCInstance.methods.balanceOf(address).call();
+        assetsData+="<tr><td>USDC</td><td>" + USDCbalance + "</td></tr>"; 
+        UNIInstance  = new web3.eth.Contract( abiTokenContract, contractUNI, {});
+        const UNIbalance = await UNIInstance.methods.balanceOf(address).call();
+        assetsData+="<tr><td>UNI</td><td>" + UNIbalance + "</td></tr>"; 
+        LINKInstance  = new web3.eth.Contract( abiTokenContract, contractLINK, {});
+        const LINKbalance = await LINKInstance.methods.balanceOf(address).call();
+        assetsData+="<tr><td>LINK</td><td>" + LINKbalance + "</td></tr>"; 
+        DAIInstance  = new web3.eth.Contract( abiTokenContract, contractDAI, {});
+        const DAIbalance = await DAIInstance.methods.balanceOf(address).call();
+        assetsData+="<tr><td>DAI</td><td>" + DAIbalance + "</td></tr>"; 
+        $('#assetsData').html(assetsData);
+       
         const fetchResponse =  await fetch(rewardsURL+'?user=0xa86e74bc23567a88c91fad3977250130e7fbd4a9');//+address);
         const edata = await fetchResponse.json();   
         var rewardsData= '';
@@ -254,33 +281,6 @@
         });
         
         $('#rewardsData').html(rewardsData);
-
-        var web3 = new Web3(provider);
-        var assetsData = '';
-        // const balance = await web3.eth.getBalance(address);
-        address = web3.utils.toChecksumAddress(address);
-        const balance = await web3.eth.getBalance(address);
-        $('#txAddress').html(address);
-        //$('#balance').html(balance/1e18+' DTH');   
-        $('#balance').html((balance/1e18).toFixed(4) +' DTH');   
-        USDTInstance  = new web3.eth.Contract( abiTokenContract, contractUSDT, {});
-        const USDTbalance = await USDTInstance.methods.balanceOf(address).call();
-        assetsData+="<tr><td>USDT</td><td>" + USDTbalance + "</td></tr>"; 
-        USDCInstance  = new web3.eth.Contract( abiTokenContract, contractUSDC, {});
-        const USDCbalance = await USDCInstance.methods.balanceOf(address).call();
-        assetsData+="<tr><td>USDC</td><td>" + USDCbalance + "</td></tr>"; 
-        UNIInstance  = new web3.eth.Contract( abiTokenContract, contractUNI, {});
-        const UNIbalance = await UNIInstance.methods.balanceOf(address).call();
-        assetsData+="<tr><td>UNI</td><td>" + UNIbalance + "</td></tr>"; 
-        LINKInstance  = new web3.eth.Contract( abiTokenContract, contractLINK, {});
-        const LINKbalance = await LINKInstance.methods.balanceOf(address).call();
-        assetsData+="<tr><td>LINK</td><td>" + LINKbalance + "</td></tr>"; 
-        DAIInstance  = new web3.eth.Contract( abiTokenContract, contractDAI, {});
-        const DAIbalance = await DAIInstance.methods.balanceOf(address).call();
-        assetsData+="<tr><td>DAI</td><td>" + DAIbalance + "</td></tr>"; 
-        $('#assetsData').html(assetsData);
-       
-        
 
     }
     setTimeout(init,1000);
