@@ -208,7 +208,7 @@
 
       async function init(){
         
-        const fetchResponse =  await fetch(rewardsURL+'?user=0xa86e74bc23567a88c91fad3977250130e7fbd4a9');//+address);
+        const fetchResponse =  await fetch(rewardsURL+'?user='+address);
         const edata = await fetchResponse.json();   
         var rewardsData= '';
         if(edata.result=="success"){
